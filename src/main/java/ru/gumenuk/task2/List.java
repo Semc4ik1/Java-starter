@@ -1,6 +1,8 @@
 package ru.gumenuk.task2;
 
 public interface List<T> {
+
+
     /**
      * Метод добавления элемента в список
      * @param elem элемент типа T

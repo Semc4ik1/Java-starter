@@ -1,5 +1,6 @@
 package ru.gumenuk.task3;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Map;
@@ -9,67 +10,76 @@ import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
-        Map<String, String> userInput = new HashMap<>();
-        Scanner scanner = new Scanner(System.in);
+        Map<String, String> phoneBook = new HashMap<>();
+        private final static Pattern PATTERN = Pattern.compile("^\\+?7 \\d{3} \\d{3} \\d{2} \\d{2}$");
 
-        while (true) {
-            System.out.println("Введите одну из выбранных команд: 1: ADD - Добавить пару, " +
-                    "2: LIST - показать все пары, " +
-                    "3: Quit ");
-            String command = scanner.nextLine();
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (true) {
+                System.out.println("Введите одну из выбранных команд: 1: ADD - Добавить пару, " +
+                        "2: LIST - показать все пары, " +
+                        "3: Quit ");
+                String command = scanner.nextLine();
 
-            if (command.equalsIgnoreCase("ADD")) {
-                System.out.println("Введите ключ: ");
-                String key = null;
-                boolean isCorrectPhoneNumber = false;
+                if (command.equalsIgnoreCase("ADD")) {
+                    System.out.println("Введите имя: ");
+                    String name = scanner.nextLine();
+                    System.out.println("Введите ключ: ");
+                    String number = null;
+                    boolean isCorrectPhoneNumber = false;
 
-                while (!isCorrectPhoneNumber) {
-                    try {
-                        key = scanner.nextLine();
-                        if (key.trim().isEmpty()) {
-                            System.out.println("Ключ не может быть пустым. Пожалуйста, попробуйте снова.");
-                            continue;
+                    while (!isCorrectPhoneNumber) {
+                        try {
+                            number = scanner.nextLine();
+                            if (number.trim().isEmpty()) {
+                                System.out.println("Ключ не может быть пустым. Пожалуйста, попробуйте снова.");
+                                continue;
+                            }
+
+                            Matcher matcher = PATTERN.matcher(number);
+
+                            if (!matcher.find()) {
+                                System.out.println("Некорректный номер телефона. Пожалуйста, попробуйте снова.");
+                            } else {
+                                System.out.println("Номер телефона добавлен.");
+                                isCorrectPhoneNumber = true;
+                            }
+                        } catch (IllegalAccessError error) {
+                            System.out.println("Ошибка ввода. Неправильно набран номер.");
+                            scanner.nextLine();
                         }
-
-                        Pattern pattern = Pattern.compile("^\\+7 \\d{3} \\d{3} \\d{2} \\d{2}$");
-                        Matcher matcher = pattern.matcher(key);
-
-                        if (!matcher.find()) {
-                            System.out.println("Некорректный номер телефона. Пожалуйста, попробуйте снова.");
-                        } else {
-                            System.out.println("Номер телефона добавлен.");
-                            isCorrectPhoneNumber = true;
-                        }
-                    } catch (InputMismatchException e) {
-                        System.out.println("Ошибка ввода. Пожалуйста, введите данные в соответствии с требованиями.");
-                        scanner.nextLine(); // Сбросить буфер сканера после исключения
                     }
-                }
 
-                // Проверяем, существует ли уже такой ключ в HashMap
-                if (userInput.containsKey(key)) {
-                    System.out.println("Контакт с номером " + key + " уже существует. Имя контакта: " +
-                            userInput.get(key));
+                    // Проверяем, существует ли уже такой ключ в HashMap
+                    if (phoneBook.containsKey(number)) {
+                        System.out.println("Контакт с номером " + number + " уже существует. Имя контакта: " +
+                                phoneBook.get(number));
+                    } else {
+
+                        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
+                            if (entry.getValue().equals(name)) {
+                                System.out.println("Контакт с таким именем уже существует. Номер контакта: " + entry.getKey());
+                                return;
+                            }
+                        }
+
+                        System.out.println("Введите значение: ");
+                        String value = scanner.nextLine();
+                        phoneBook.put(name, number);
+                        System.out.println("Пара добавлена!!!");
+                    }
+
+                } else if (command.equalsIgnoreCase("LIST")) {
+                    System.out.println("Вот все пары: ");
+                    for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
+                        System.out.println("Имя: " + entry.getKey() + ", Ключ: " + entry.getValue());
+                    }
+                } else if (command.equalsIgnoreCase("QUIT")) {
+                    System.out.println("Выход из программы: ");
+                    break;
                 } else {
-                    System.out.println("Введите значение: ");
-                    String value = scanner.nextLine();
-                    userInput.put(key, value);
-                    System.out.println("Пара добавлена!!!");
+                    System.out.println("Неизвестная команда. Попробуйте снова.");
                 }
-
-            } else if (command.equalsIgnoreCase("LIST")) {
-                System.out.println("Вот все пары: ");
-                for (Map.Entry<String, String> entry : userInput.entrySet()) {
-                    System.out.println("Ключ: " + entry.getKey() + ", Значение: " + entry.getValue());
-                }
-            } else if (command.equalsIgnoreCase("QUIT")) {
-                System.out.println("Выход из программы: ");
-                break;
-            } else {
-                System.out.println("Неизвестная команда. Попробуйте снова.");
             }
-
         }
-        scanner.close();
     }
 }

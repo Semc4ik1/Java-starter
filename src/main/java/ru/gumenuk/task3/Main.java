@@ -25,6 +25,13 @@ public class Main {
                 if (command.equalsIgnoreCase("ADD")) {
                     System.out.println("Введите имя: ");
                     String name = scanner.nextLine();
+
+                    // Проверяем, существует ли уже имя
+                    if (phoneBook.containsKey(name)) {
+                        System.out.println("Контакт с таким именем уже существует. Номер контакта: " + phoneBook.get(name));
+                        return; // Прекращаем выполнение метода, если имя уже существует
+                    }
+
                     System.out.println("Введите ключ: ");
                     String number = null;
                     boolean isCorrectPhoneNumber = false;
@@ -51,24 +58,10 @@ public class Main {
                         }
                     }
 
-                    // Проверяем, существует ли уже имя
-                    if (phoneBook.containsKey(number)) {
-                        System.out.println("Контакт с номером " + number + " уже существует. Имя контакта: " +
-                                phoneBook.get(number));
-                    } else {
+                    // Если имя не было найдено, добавляем новую пару
+                    phoneBook.put(name, number);
+                    System.out.println("Пара добавлена!!!");
 
-                        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
-                            if (entry.getValue().equals(name)) {
-                                System.out.println("Контакт с таким именем уже существует. Номер контакта: " + entry.getKey());
-                                return;
-                            }
-                        }
-
-                       /* System.out.println("Введите значение: ");
-                        String value = scanner.nextLine();*/
-                        phoneBook.put(name, number);
-                        System.out.println("Пара добавлена!!!");
-                    }
 
                 } else if (command.equalsIgnoreCase("LIST")) {
                     System.out.println("Вот все пары: ");

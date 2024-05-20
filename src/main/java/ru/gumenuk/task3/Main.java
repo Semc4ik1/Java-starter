@@ -9,9 +9,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
+    private static final Pattern PATTERN = Pattern.compile("^\\+?7 \\d{3} \\d{3} \\d{2} \\d{2}$");
     public static void main(String[] args) {
         Map<String, String> phoneBook = new HashMap<>();
-        private final static Pattern PATTERN = Pattern.compile("^\\+?7 \\d{3} \\d{3} \\d{2} \\d{2}$");
+
 
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {

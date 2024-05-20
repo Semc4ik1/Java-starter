@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
+    //исправил константу
     private static final Pattern PATTERN = Pattern.compile("^\\+?7 \\d{3} \\d{3} \\d{2} \\d{2}$");
     public static void main(String[] args) {
         Map<String, String> phoneBook = new HashMap<>();
@@ -50,7 +51,7 @@ public class Main {
                         }
                     }
 
-                    // Проверяем, существует ли уже такой ключ в HashMap
+                    // Проверяем, существует ли уже имя
                     if (phoneBook.containsKey(number)) {
                         System.out.println("Контакт с номером " + number + " уже существует. Имя контакта: " +
                                 phoneBook.get(number));
@@ -63,8 +64,8 @@ public class Main {
                             }
                         }
 
-                        System.out.println("Введите значение: ");
-                        String value = scanner.nextLine();
+                       /* System.out.println("Введите значение: ");
+                        String value = scanner.nextLine();*/
                         phoneBook.put(name, number);
                         System.out.println("Пара добавлена!!!");
                     }

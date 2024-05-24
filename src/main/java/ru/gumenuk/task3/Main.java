@@ -1,10 +1,12 @@
 package ru.gumenuk.task3;
 
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 public class Main {
     private static final Pattern PATTERN = Pattern.compile("^\\+?7 \\d{3} \\d{3} \\d{2} \\d{2}$");
@@ -12,6 +14,8 @@ public class Main {
     public static void main(String[] args) {
         Map<String, String> phoneBook = new HashMap<>();
         Scanner scanner = new Scanner(System.in);
+
+
 
         while (true) {
             System.out.println("Введите одну из выбранных команд: 1: ADD - Добавить пару, " +
@@ -55,20 +59,18 @@ public class Main {
                             System.out.println("Номер телефона добавлен.");
                             isCorrectPhoneNumber = true;
                         }
-                    } catch (IllegalArgumentException error) {
-                        System.out.println("Ошибка ввода. Неправильно набран номер.");
-                        scanner.nextLine();
+                    } catch (IllegalArgumentException exception) {
+                        throw new IllegalArgumentException("Condition is false");
+
                     }
                 }
 
 
-                phoneBook.put(name, number);
+                phoneBook.put(number, name);
                 System.out.println("Пара добавлена!!!");
             } else if (command.equalsIgnoreCase("LIST")) {
                 System.out.println("Вот все пары: ");
-                for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
-                    System.out.println("Имя: " + entry.getKey() + ", Ключ: " + entry.getValue());
-                }
+                phoneBook.forEach((name, phoneNumber) -> System.out.println("Имя: " + name + ", Номер: " + phoneNumber));
             } else if (command.equalsIgnoreCase("QUIT")) {
                 System.out.println("Выход из программы: ");
                 break;

@@ -44,7 +44,7 @@ public class Main {
                 boolean isCorrectPhoneNumber = false;
 
                 while (!isCorrectPhoneNumber) {
-                    try {
+
                         number = scanner.nextLine();
                         if (number.trim().isEmpty()) {
                             System.out.println("Ключ не может быть пустым. Пожалуйста, попробуйте снова.");
@@ -59,10 +59,9 @@ public class Main {
                             System.out.println("Номер телефона добавлен.");
                             isCorrectPhoneNumber = true;
                         }
-                    } catch (IllegalArgumentException exception) {
-                        throw new IllegalArgumentException("Condition is false");
 
-                    }
+
+
                 }
 
 

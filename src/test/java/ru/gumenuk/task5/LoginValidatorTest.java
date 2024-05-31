@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoginValidatorTest {
     @Test
     void testValidateValidLogin() throws WrongLoginException {
-        assertTrue(LoginValidator.validate("valid_login"), "Valid login should pass validation");
+        assertTrue(LoginValidator.validate("Valid_login"), "Valid login should pass validation");
     }
 
     @Test
@@ -18,7 +18,7 @@ class LoginValidatorTest {
 
     @Test
     void testValidateTooLongLogin() {
-        assertThrows(WrongLoginException.class, () -> LoginValidator.validate("1a".repeat(21)), "Should throw exception for too long login");
+        assertThrows(WrongLoginException.class, () -> LoginValidator.validate("b".repeat(21)), "Should throw exception for too long login");
     }
 
 

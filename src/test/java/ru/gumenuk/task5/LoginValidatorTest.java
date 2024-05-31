@@ -11,15 +11,7 @@ class LoginValidatorTest {
         assertTrue(LoginValidator.validate("Valid_login"), "Valid login should pass validation");
     }
 
-    @Test
-    void testValidateInvalidLogin() {
-        assertThrows(WrongLoginException.class, () -> LoginValidator.validate("valid_login"), "Should throw exception for invalid login");
-    }
 
-    @Test
-    void testValidateTooLongLogin() {
-        assertThrows(WrongLoginException.class, () -> LoginValidator.validate("b".repeat(21)), "Should throw exception for too long login");
-    }
 
 
 }

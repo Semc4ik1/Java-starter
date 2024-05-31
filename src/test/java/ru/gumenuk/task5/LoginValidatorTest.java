@@ -13,7 +13,7 @@ class LoginValidatorTest {
 
     @Test
     void testValidateInvalidLogin() {
-        assertThrows(WrongLoginException.class, () -> LoginValidator.validate("invalid_login"), "Should throw exception for invalid login");
+        assertThrows(WrongLoginException.class, () -> LoginValidator.validate("valid_login"), "Should throw exception for invalid login");
     }
 
     @Test

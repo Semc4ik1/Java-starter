@@ -9,18 +9,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoginValidatorTest {
     @Test
     void validate_shouldReturnTrue_loginIsValid() throws WrongLoginException {
-        assertTrue(LoginValidator.validate("Valid_login"), "assertTrue(condition");
+        assertTrue(LoginValidator.validate("Valid_login"), "1a");
 
     }
     @Test
     void isValid_ShouldNoPositive_isValid() throws WrongMethodTypeException {
 
-        assertFalse(LoginValidator.isValid("Привет"));
+        assertFalse(LoginValidator.isValid("Привет"), "1а");
     }
     @Test
     void validate_shouldBeLess_LoginLength() throws IllegalArgumentException, WrongLoginException {
 
-        assertFalse(LoginValidator.validate("LoginTooLongVeryVeryVery"));
+        assertFalse(LoginValidator.validate("LoginTooLongVeryVeryVery"), "1b");
     }
 
 

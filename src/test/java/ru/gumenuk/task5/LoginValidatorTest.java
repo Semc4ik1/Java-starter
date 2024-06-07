@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoginValidatorTest {
     @Test
     void validate_shouldReturnTrue_loginIsValid() throws WrongLoginException {
-        assertTrue(LoginValidator.validate("Valid_login"), "1a");
+        assertTrue(LoginValidator.validate("Valid_login"), "assertTrue(condition");
 
     }
     @Test

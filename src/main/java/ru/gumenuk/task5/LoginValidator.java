@@ -11,7 +11,7 @@ public class LoginValidator {
         return true;
     }
 
-    private static boolean isValid(String login) {
+    public static boolean isValid(String login) {
         String regex = "^[A-Za-z0-9_]*$";
         return login.matches(regex);
     }

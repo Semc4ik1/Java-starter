@@ -1,13 +1,14 @@
 package ru.gumenuk.task5;
 
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         boolean isValidate = false;
 
         if (args.length != 1) {
-            System.err.println("Invalid number of arguments. Using Java <login>");
-            System.exit(1);
+            throw new RuntimeException("Invalid number of arguments. Using Java <login>");
         }
         try {
             isValidate = LoginValidator.validate(args[0]);
@@ -17,3 +18,4 @@ public class Main {
         System.out.println("Login is correct: " + isValidate);
     }
 }
+

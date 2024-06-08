@@ -23,6 +23,12 @@ class LoginValidatorTest {
     }
 
     @Test
+    void isValid_shouldReturnTrue_correctLogin() {
+        assertTrue(LoginValidator.isValid("correctLogin"));
+    }
+
+
+    @Test
     void validate_shouldThrowWrongLoginExceptionWithMessage1b_tooLongLoginLength() {
         WrongLoginException e = assertThrows(WrongLoginException.class, () ->
                 LoginValidator.validate("123451234512345123451"));

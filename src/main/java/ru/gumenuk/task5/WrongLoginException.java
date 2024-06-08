@@ -1,11 +1,11 @@
-    package ru.gumenuk.task5;
+package ru.gumenuk.task5;
 
-    public class WrongLoginException extends Exception {
-        public WrongLoginException() {
-            super();
-        }
-
-        public WrongLoginException(String message) {
-            super(message);
-        }
+public class WrongLoginException extends Exception {
+    public WrongLoginException() {
+        super();
     }
+
+    public WrongLoginException(String message) {
+        super(message);
+    }
+}

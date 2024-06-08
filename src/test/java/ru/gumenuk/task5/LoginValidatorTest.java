@@ -1,26 +1,32 @@
 package ru.gumenuk.task5;
-
 import org.junit.jupiter.api.Test;
-
-import java.lang.invoke.WrongMethodTypeException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class LoginValidatorTest {
     @Test
     void validate_shouldReturnTrue_loginIsValid() throws WrongLoginException {
-        assertTrue(LoginValidator.validate("Valid_login"), "assertTrue(condition");
+        assertTrue(LoginValidator.validate("Valid_login"));
 
     }
     @Test
-    void isValid_ShouldNoPositive_isValid() throws WrongMethodTypeException {
-
-        assertFalse(LoginValidator.isValid("Привет"), "1а");
+    void validate_shouldReturnFalse_loginIsValidMismatch() throws WrongLoginException {
+        assertFalse(LoginValidator.validate("Valid_login 3544 "));
+        WrongLoginException e = assertThrows(WrongLoginException.class, () ->
+                LoginValidator.isValid("Малдкилуьб")); assertEquals("1a", e.getMessage());
     }
     @Test
-    void validate_shouldBeLess_LoginLength() throws IllegalArgumentException, WrongLoginException {
+    void isValid_shouldReturnFalse_loginRegexpMismatch()  {
 
-        assertFalse(LoginValidator.validate("LoginTooLongVeryVeryVery"), "1b");
+        assertFalse(LoginValidator.isValid("Привет"));
+        WrongLoginException e = assertThrows(WrongLoginException.class, () ->
+                LoginValidator.isValid("Малдкилуьб")); assertEquals("1a", e.getMessage());
+    }
+    @Test
+    void validate_shouldBeLess_LoginLength() throws  WrongLoginException {
+
+        assertFalse(LoginValidator.validate("LoginTooLongVeryVeryVery"));
+        WrongLoginException e = assertThrows(WrongLoginException.class, () ->
+                LoginValidator.validate("Fgegrgemgegemggmem")); assertEquals("1b", e.getMessage());
     }
 
 
